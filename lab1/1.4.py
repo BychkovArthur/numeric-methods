@@ -3,8 +3,10 @@ import matplotlib.pyplot as plt
 
 '''
     Т.к. матрица симетричная, ее СВ ортогональны:
-    А = JT S J, где J - ортогональная матрица.
+    А = JT*S*J, где J - ортогональная матрица.
     S - диагональная матрица из СЗ
+    
+    Lam = JT * S * J
 '''
 
 def jacobi_eigenvalue(A, tol=1e-20):
@@ -27,6 +29,7 @@ def jacobi_eigenvalue(A, tol=1e-20):
         
         print(p, q)
 
+        # Угол, на который надо сделать поворот
         theta = 0.5 * np.arctan(2 * A[p, q] / (A[p, p] - A[q, q])) if A[p, p] != A[q, q] else np.pi / 4
 
         # Создаем матрицу поворота
@@ -49,12 +52,11 @@ def jacobi_eigenvalue(A, tol=1e-20):
 
     return eigenvalues, eigenvectors, error_history
 
-# Пример использования
-A = np.array([[-8, -4, 8],
-              [-4, -3, 9],
-              [8, 9, -5]])
+A = np.array([[-9, 7, 5],
+              [7, 8, 9],
+              [5, 9, 8]])
 
-eigenvalues, eigenvectors, error_history = jacobi_eigenvalue(A, tol=1e-10)
+eigenvalues, eigenvectors, error_history = jacobi_eigenvalue(A, tol=1e-25)
 
 print("Собственные значения:")
 print(eigenvalues)
