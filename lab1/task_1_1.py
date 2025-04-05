@@ -100,21 +100,22 @@ def inverse_matrix(A):
     return inv_A
 
 
-A = np.array([[2, 7, -8, 6],
-              [4, 4, 0, -7],
-              [-1, -3, 6, 3],
-              [9, -7, -2, -8]], dtype=float)
-b = np.array([-39, 41, 4, 113], dtype=float)
+if __name__ == "main":
+    A = np.array([[2, 7, -8, 6],
+                [4, 4, 0, -7],
+                [-1, -3, 6, 3],
+                [9, -7, -2, -8]], dtype=float)
+    b = np.array([-39, 41, 4, 113], dtype=float)
 
-P, L, U = lu_decomposition(A)
+    P, L, U = lu_decomposition(A)
 
-print("P = \n", P, end='\n\n\n')
-print("L = \n", L, end='\n\n\n')
-print("U = \n", U, end='\n\n\n')
+    print("P = \n", P, end='\n\n\n')
+    print("L = \n", L, end='\n\n\n')
+    print("U = \n", U, end='\n\n\n')
 
-print("x = ", solve_slu(A, b), end='\n\n\n')
+    print("x = ", solve_slu(A, b), end='\n\n\n')
 
-print("det from numpy = ", np.linalg.det(A))
-print("det            = ", determinant(A), end='\n\n\n')
+    print("det from numpy = ", np.linalg.det(A))
+    print("det            = ", determinant(A), end='\n\n\n')
 
-print("inverse A = \n", inverse_matrix(A))
+    print("inverse A = \n", inverse_matrix(A))
