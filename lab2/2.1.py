@@ -16,8 +16,7 @@ def fDer2(x):
 
 def newton(x0, eps):
     if (f(x0) * fDer2(x0) <= 0):
-        # Неправильно! Достаточное трактую, как необходимое
-        raise Exception(f'Последовательность с x_0={x0} не будет сходиться к корню')
+        raise Exception(f'Последовательность с x_0={x0} может не сойтись к корню')
 
     xPrev = x0
     iter = 0
@@ -50,7 +49,6 @@ def simpleIterations(x0, q, eps):
     while (True):
         iter += 1
         xCur = phi(xPrev)
-        # q вычислить точно, не из графических соображений
         error = q / (1 - q) * abs(xCur - xPrev)
         if error < eps:
             break
@@ -67,7 +65,8 @@ print("Метод Ньютона")
 print("\tКорень: ", newtonAns)
 print("\tКоличество итераций: ", iter)
 
-q = 0.5
+q = 1 / (6 * math.log(3))  # Значение функции в точке 1
+
 simpleIterationsAns, iter = simpleIterations(x0, q, eps)
 print("Метода простых итераций")
 print("\tКорень: ", simpleIterationsAns)

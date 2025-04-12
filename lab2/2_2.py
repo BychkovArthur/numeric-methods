@@ -6,10 +6,10 @@ sys.path.append(str(Path(__file__).parent.parent))
 from lab1.task_1_1 import solve_slu
 '''
     Вариант 2
-    
+
     (x1^2 + 3^2)x2 - 3^3 = 0
     (x1 - 3/2)^2 + (x2 - 3/2)^2 - 3^2 = 0
-    
+
     --------------------------------------------------------------------
     Систему нелинейных уравнений можно записать в виде:
     f_{1}(x_{1}, ..., x_{n}) = 0
@@ -45,7 +45,6 @@ from lab1.task_1_1 import solve_slu
 
 '''
 
-# NORM = np.inf
 def inf_norm_diff(xCur, xPrev):
     return np.max(np.abs(np.array(xCur) - np.array(xPrev)))
 
@@ -94,7 +93,6 @@ def simpleIterations(x0, q, eps):
     while (True):
         iter += 1
         xCur = phi(xPrev)
-        # Исправить q
         error = q / (1 - q) * inf_norm_diff(xCur ,xPrev)
         if error < eps:
             break
@@ -108,11 +106,14 @@ x0 = np.array([4.4, 1])
 
 newtonAns, iter = newton(x0, eps)
 print("Метод Ньютона")
-print("\tКорень: ", newtonAns) # Не корень, а решение.
+print("\tРешение: ", newtonAns)
 print("\tКоличество итераций: ", iter)
 
-q = 0.5  # Долго считал на листочке)
+q = max(
+    abs((-54 * 4.3) / (4.3**4 + 18 * 4.3**2 + 81)),
+    abs((-2 * 0.9 + 3) / (np.sqrt(-4 * 0.9**2 + 12 * 0.9 + 27)))
+)
 simpleIterationsAns, iter = simpleIterations(x0, q, eps)
 print("Метода простых итераций")
-print("\tКорень: ", simpleIterationsAns)
+print("\tРешение: ", simpleIterationsAns)
 print("\tКоличество итераций: ", iter)
