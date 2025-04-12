@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent.parent))
-from lab1.task_1_1 import solve_slu, determinant
+from lab1.task_1_1 import solve_slu
 '''
     Вариант 2
     
@@ -45,7 +45,9 @@ from lab1.task_1_1 import solve_slu, determinant
 
 '''
 
-NORM = np.inf
+# NORM = np.inf
+def inf_norm_diff(xCur, xPrev):
+    return np.max(np.abs(np.array(xCur) - np.array(xPrev)))
 
 
 '''
@@ -75,7 +77,7 @@ def newton(x0, eps):
         iter += 1
         xDelta = solve_slu(J(xPrev), -f(xPrev))
         xCur = xPrev + xDelta
-        if np.linalg.norm(xCur - xPrev, NORM) < eps:
+        if inf_norm_diff(xCur ,xPrev) < eps:
             break
         xPrev = xCur
     return xCur, iter
@@ -92,7 +94,8 @@ def simpleIterations(x0, q, eps):
     while (True):
         iter += 1
         xCur = phi(xPrev)
-        error = q / (1 - q) * np.linalg.norm(xCur - xPrev, NORM)
+        # Исправить q
+        error = q / (1 - q) * inf_norm_diff(xCur ,xPrev)
         if error < eps:
             break
         xPrev = xCur
@@ -105,7 +108,7 @@ x0 = np.array([4.4, 1])
 
 newtonAns, iter = newton(x0, eps)
 print("Метод Ньютона")
-print("\tКорень: ", newtonAns)
+print("\tКорень: ", newtonAns) # Не корень, а решение.
 print("\tКоличество итераций: ", iter)
 
 q = 0.5  # Долго считал на листочке)

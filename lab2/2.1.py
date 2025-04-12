@@ -16,7 +16,8 @@ def fDer2(x):
 
 def newton(x0, eps):
     if (f(x0) * fDer2(x0) <= 0):
-        raise Exception(f'Последовательность с x_0={x0} не будет сходится к корню')
+        # Неправильно! Достаточное трактую, как необходимое
+        raise Exception(f'Последовательность с x_0={x0} не будет сходиться к корню')
 
     xPrev = x0
     iter = 0
@@ -49,6 +50,7 @@ def simpleIterations(x0, q, eps):
     while (True):
         iter += 1
         xCur = phi(xPrev)
+        # q вычислить точно, не из графических соображений
         error = q / (1 - q) * abs(xCur - xPrev)
         if error < eps:
             break
