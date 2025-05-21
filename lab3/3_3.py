@@ -6,6 +6,12 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 from lab1.task_1_1 import solve_slu
 
+
+
+
+'''
+    Вычисляю значение многочлена
+'''
 def getValue(as_: list, x):
     return sum(ai * x**i for i, ai in enumerate(as_))
 
@@ -15,6 +21,14 @@ ys = np.array([0.86603, 1.0, 0.86603, 0.50, 0.0, -0.50])
 
 N = len(xs)
 
+"""
+    Составляем нормальную систему МНК
+
+    И ищем a_i
+
+    Решив систему, найдем многочлен, который приблежает
+    ф-ю и минимизирует квадрат отклонения (степень n)
+"""
 A = np.zeros((n, n))
 b = np.zeros(n)
 for k in range(n):

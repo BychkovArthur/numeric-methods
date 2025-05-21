@@ -59,6 +59,10 @@ def spline(xs, fs: list, x):
     for i in range(n - 2):
         b[i] = 3 * ((fs[i + 2] - fs[i + 1]) / (hs[i + 2]) - (fs[i + 1] - fs[i]) / (hs[i + 1]))
 
+    """
+        Нашли c, теперь восстанавливаем a, b, d
+    """
+
     cs = tridiagonalMatrixAlgorithm(A, b)
     cs = np.concatenate((np.zeros(1), cs))  # Добавляем c_0 = 0
 
