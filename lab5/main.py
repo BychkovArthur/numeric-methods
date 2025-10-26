@@ -161,16 +161,16 @@ def crank_nicolson_scheme(Nx, Nt):
     off_diag_B = np.ones(Nx-3) * sigma
     B = diags([off_diag_B, main_diag_B, off_diag_B], [-1, 0, 1], format='csc')
 
-    for n in range(0, Nt-1):
-        Ds = B.dot(u[n, 1:-1])
+    for k in range(0, Nt-1):
+        Ds = B.dot(u[k, 1:-1])
 
-        Ds[0] += sigma * (left_boundary(t[n+1]) + left_boundary(t[n]))
-        Ds[-1] += sigma * (right_boundary(t[n+1]) + right_boundary(t[n]))
+        Ds[0] += sigma * (left_boundary(t[k+1]) + left_boundary(t[k]))
+        Ds[-1] += sigma * (right_boundary(t[k+1]) + right_boundary(t[k]))
 
-        u[n+1, 1:-1] = progonka(As, Bs, Cs, Ds)
+        u[k+1, 1:-1] = progonka(As, Bs, Cs, Ds)
 
-        u[n+1, 0] = left_boundary(t[n+1])
-        u[n+1, -1] = right_boundary(t[n+1])
+        u[k+1, 0] = left_boundary(t[k+1])
+        u[k+1, -1] = right_boundary(t[k+1])
 
     return x, t, u
 
